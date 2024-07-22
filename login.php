@@ -1,42 +1,8 @@
  <?php
 
 
-if (isset($_POST["loginbtn"])) {
-    include("dbconnect.php");
 
-    $eid = $_POST["email"];
-    $pwd = $_POST["password"];
-
-    // Check for admin login
-    if ($eid == "admin" && $pwd == "admin") {
-        header("location:admin.php");
-        exit();
-    }
-
-    // Hash the password with md5
-    $pwd = md5($pwd);
-
-    // Query the database
-    $qry = "SELECT * FROM `register` WHERE email = '$eid' AND password = '$pwd'";
-    $result = mysqli_query($connect, $qry);
-
-    if (!$result) {
-        die("Query failed: " . mysqli_error($connect));
-    }
-
-    // Check the number of rows returned
-    $row = mysqli_num_rows($result);
-
-    if ($row > 0) {
-        header("location: user.php");
-        exit();
-    } else {
-        echo "Invalid email or password";
-    }
-}
-
-
-/*if(isset($_SESSION['uid']))
+if(isset($_SESSION['uid']))
 {
     header("location:user.php");
 }
@@ -74,7 +40,7 @@ if (isset($_POST["loginbtn"]))
     else {
         echo "Invalid email or password";
         }    
-}*/
+}
     ?> 
 
     <!DOCTYPE html>
